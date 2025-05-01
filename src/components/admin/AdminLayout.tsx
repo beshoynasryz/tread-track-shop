@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { 
   LayoutDashboard, 
@@ -9,7 +9,10 @@ import {
   Settings, 
   BarChart,
   LogOut,
-  ChevronRight
+  ChevronRight,
+  MessageSquare,
+  PackageOpen,
+  Tags
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -21,6 +24,7 @@ interface AdminLayoutProps {
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
   const { logout, isAdmin } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   
   // If not admin, redirect to home
   React.useEffect(() => {
@@ -36,7 +40,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
   const navItems = [
     { name: 'Dashboard', icon: <LayoutDashboard className="h-5 w-5" />, path: '/admin' },
     { name: 'Products', icon: <ShoppingBag className="h-5 w-5" />, path: '/admin/products' },
-    { name: 'Customers', icon: <Users className="h-5 w-5" />, path: '/admin/customers' },
+    { name: 'Categories', icon: <Tags className="h-5 w-5" />, path: '/admin/categories' },
+    { name: 'Testimonials', icon: <MessageSquare className="h-5 w-5" />, path: '/admin/testimonials' },
+    { name: 'Orders', icon: <PackageOpen className="h-5 w-5" />, path: '/admin/orders' },
+    { name: 'Customers', icon: <Users className="h-5 w-5" />, path: '/admin/users' },
     { name: 'Analytics', icon: <BarChart className="h-5 w-5" />, path: '/admin/analytics' },
     { name: 'Settings', icon: <Settings className="h-5 w-5" />, path: '/admin/settings' },
   ];
@@ -63,7 +70,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
               key={item.path}
               variant="ghost"
               className={`w-full justify-start p-4 text-left text-white hover:bg-navy/90 ${
-                window.location.pathname === item.path ? 'bg-teal/10 border-l-4 border-teal' : ''
+                location.pathname === item.path ? 'bg-teal/10 border-l-4 border-teal' : ''
               }`}
               onClick={() => navigate(item.path)}
             >
@@ -71,7 +78,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
                 {item.icon}
                 <span className="ml-4">{item.name}</span>
               </span>
-              {window.location.pathname === item.path && (
+              {location.pathname === item.path && (
                 <ChevronRight className="ml-auto h-5 w-5" />
               )}
             </Button>

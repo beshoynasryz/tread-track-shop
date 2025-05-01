@@ -5,19 +5,19 @@ const testimonials = [
   {
     name: 'Alex Johnson',
     role: 'Marathon Runner',
-    content: 'These running shoes completely transformed my training routine. The comfort and support they provide is unmatched. I've shaved minutes off my best time!',
+    content: "These running shoes completely transformed my training routine. The comfort and support they provide is unmatched. I've shaved minutes off my best time!",
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
   },
   {
     name: 'Sarah Williams',
     role: 'Fitness Instructor',
-    content: 'As someone who's on their feet all day, finding comfortable shoes is essential. These are hands down the best athletic shoes I've ever owned.',
+    content: "As someone who's on their feet all day, finding comfortable shoes is essential. These are hands down the best athletic shoes I've ever owned.",
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
   },
   {
     name: 'Michael Chen',
     role: 'Casual Wearer',
-    content: 'Not only are these shoes incredibly comfortable for daily wear, but they also look amazing. I get compliments everywhere I go. Definitely worth every penny!',
+    content: "Not only are these shoes incredibly comfortable for daily wear, but they also look amazing. I get compliments everywhere I go. Definitely worth every penny!",
     avatar: 'https://randomuser.me/api/portraits/men/62.jpg'
   }
 ];
