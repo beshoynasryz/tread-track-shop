@@ -1,13 +1,28 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ShoppingCart, Search, Menu, X } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ShoppingCart, Search, Menu, X, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import CartPreview from '../cart/CartPreview';
+import { useAuth } from '@/contexts/AuthContext';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { user, logout, isAdmin } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <header className="bg-navy text-white py-4 sticky top-0 z-50">
@@ -45,11 +60,59 @@ const Navbar = () => {
           </Link>
         </nav>
 
-        {/* Search and Cart */}
+        {/* Search, User and Cart */}
         <div className="hidden md:flex items-center space-x-4">
           <Button variant="ghost" size="icon" className="hover:text-coral">
             <Search className="h-5 w-5" />
           </Button>
+          
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="hover:text-coral relative">
+                  <User className="h-5 w-5" />
+                  {isAdmin && (
+                    <span className="absolute -top-1 -right-1 bg-teal text-white text-xs rounded-full h-3 w-3"></span>
+                  )}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <div className="px-4 py-3 border-b">
+                  <p className="font-medium">{user.name}</p>
+                  <p className="text-xs text-muted-foreground">{user.email}</p>
+                </div>
+                {isAdmin && (
+                  <>
+                    <DropdownMenuItem onClick={() => navigate('/admin')}>
+                      Admin Dashboard
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                  </>
+                )}
+                <DropdownMenuItem onClick={() => navigate('/profile')}>
+                  My Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/orders')}>
+                  Order History
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="text-red-600">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Log out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="hover:text-coral"
+              onClick={() => navigate('/login')}
+            >
+              Login
+            </Button>
+          )}
+          
           <div className="relative">
             <Button 
               variant="ghost" 
@@ -113,6 +176,44 @@ const Navbar = () => {
             >
               Kids
             </Link>
+            
+            {user ? (
+              <>
+                <div className="pt-2 border-t border-gray-700">
+                  <p className="text-sm">{user.name}</p>
+                  <p className="text-xs text-gray-400">{user.email}</p>
+                </div>
+                {isAdmin && (
+                  <Link
+                    to="/admin"
+                    className="hover:text-coral transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Admin Dashboard
+                  </Link>
+                )}
+                <Button 
+                  variant="ghost" 
+                  className="justify-start hover:text-coral p-0 h-auto font-normal"
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Log out
+                </Button>
+              </>
+            ) : (
+              <Link
+                to="/login"
+                className="hover:text-coral transition-colors border-t border-gray-700 pt-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Login / Register
+              </Link>
+            )}
+            
             <div className="flex items-center justify-between pt-2 border-t border-gray-700">
               <Button variant="ghost" size="icon" className="hover:text-coral">
                 <Search className="h-5 w-5" />
@@ -120,7 +221,7 @@ const Navbar = () => {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="hover:text-coral"
+                className="hover:text-coral relative"
                 onClick={() => {
                   setIsCartOpen(!isCartOpen);
                   setIsMenuOpen(false);
