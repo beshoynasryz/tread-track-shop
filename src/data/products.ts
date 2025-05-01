@@ -30,7 +30,7 @@ export const products: Product[] = [
     category: 'men',
     colors: ['#000000', '#FFFFFF', '#FF0000'],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
-    description: 'Inspired by London's music scene, the Air Max Pulse brings a fresh beat to the iconic Air Max family. Its textile-wrapped midsole and vacuum-sealed accents give off a modern techwear vibe that's impossible to ignore.',
+    description: "Inspired by London's music scene, the Air Max Pulse brings a fresh beat to the iconic Air Max family. Its textile-wrapped midsole and vacuum-sealed accents give off a modern techwear vibe that's impossible to ignore.",
     features: [
       'Vacuum-sealed accents add techwear style',
       'Air-Sole unit in the heel provides cushioned comfort',
@@ -124,7 +124,7 @@ export const products: Product[] = [
     category: 'kids',
     colors: ['#FFFFFF', '#000000'],
     sizes: [3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5],
-    description: 'The Nike Force 1 LE brings back the '80s b-ball icon in a classic all-white or all-black look. The soft leather on the upper breaks in easily and is easy to clean. And just like on the adult version, the Nike Air unit in the sole adds lightweight cushioning.',
+    description: "The Nike Force 1 LE brings back the '80s b-ball icon in a classic all-white or all-black look. The soft leather on the upper breaks in easily and is easy to clean. And just like on the adult version, the Nike Air unit in the sole adds lightweight cushioning.",
     features: [
       'Leather upper is durable and easy to clean',
       'Nike Air cushioning provides all-day comfort',
