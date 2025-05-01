@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom shoe store colors
+				navy: '#282c4c',
+				teal: '#06648e',
+				brick: '#ac3c24',
+				coral: '#e26c64',
+				sage: '#6c9c9e',
+				rose: '#c79d9b',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
